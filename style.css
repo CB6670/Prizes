@@ -1,0 +1,16 @@
+#prizeSection {
+  display: flex;
+  justify-content: space-around;
+}
+ #customerSection{
+     display: flex;
+     justify-content: space-around;
+ }
+ #content{
+     height:200px;
+     width:150px;
+     display:flex;
+ }
+ h1{
+     text-align: center;
+ }
