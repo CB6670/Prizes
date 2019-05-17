@@ -1,10 +1,14 @@
 #prizeSection {
   display: flex;
   justify-content: space-around;
+  height:300px;
+  align-content:center;
 }
  #customerSection{
      display: flex;
      justify-content: space-around;
+     height:300px;
+     align-content: center
  }
  #content{
      height:200px;

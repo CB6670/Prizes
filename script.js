@@ -22,7 +22,6 @@ const data = {
     Bazz: 5
   }
 };
-
 // class DivMaker {
 //   constructor(data) {
 //     this.data = data;
@@ -38,15 +37,11 @@ class Customers {
     this.data = data;
     this.customers = this.getCustomers();
   }
-  values(obj) {
-    for (let key in obj) {
-    }
-  }
   getCustomers() {
     const custs = Object.keys(this.data.customers);
     //console.log(custs);
-    const przs = Object.keys(this.data.prizes);
-    console.log(przs);
+    const przs = values(this.data.customers).slice(6);
+    //console.log(przs);
     //const vals = Object.values(data.customers)
 
     const custNames = custs.map(name => {
@@ -55,9 +50,8 @@ class Customers {
         <div>
         ${name}
         <ul>
-        ${przs
-          .map(thing => {
-            return `<li><div>${thing}</div>  <div><button>-</button>  <button>+</button></div></li>`;
+        ${przs.map(thing => {
+            return `<li><div>${thing}</div>  <div><button id = "minus">-</button>  <button id = "plus">+</button></div></li>`;
           })
           .join("")}
         </ul>
@@ -79,10 +73,11 @@ class Prizes {
     //this.addPrize = this.addPrize();
   }
   getPrizes() {
-    const prz = Object.keys(data.prizes);
+    const prz = values(this.data.prizes);
     //const vals = Object.values(data.prizes);
-    const przs = prz.map(p => {
-      return `
+    const przs = prz
+      .map(p => {
+        return `
     <div>
     ${p}
     <ul>
@@ -91,19 +86,25 @@ class Prizes {
     
     </div>
     `;
-    }).join('');
+      })
+      .join("");
     return przs;
   }
 
   //addPrize() {}
 }
-function looper(data) {
-  for (let key in data) {
-    for (let otherKey in data[key]) {
-      data[key][otherKey];
+function values(obj, arr = []) {
+    for(let key in obj){
+        if(typeof obj[key]==="object"){
+            values(obj[key],arr);
+        }else{
+            arr.push( `${key}: ${obj[key]}`);
+        }
     }
+    return arr;
   }
-}
+
+
 const firstCust = new Customers(data);
 const firstPrize = new Prizes(data);
 console.log(firstCust.getCustomers());
@@ -112,3 +113,8 @@ const customerSection = document.querySelector("#customerSection");
 customerSection.innerHTML = firstCust.getCustomers();
 const prizeSection = document.querySelector("#prizeSection");
 prizeSection.innerHTML = firstPrize.getPrizes();
+
+//const plus = document.querySelector('#plus');
+// plus.addEventListener('click',()=>{
+
+// });
